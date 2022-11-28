@@ -1,0 +1,46 @@
+import java.time.Duration;
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
+import org.testng.Assert;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
+
+import Utility.BrowserSetup;
+import Utility.Log4j2;
+import Utility.BrowserSetup.Browser;
+
+
+
+public class NewTestAlert extends TestBase {
+	
+
+	
+	@Test(priority=1)
+	public  void Alert1() throws Exception {
+
+		wd.findElement(By.id("alertButton")).click();
+		Thread.sleep(2000);
+		Alert simpleAlert = wd.switchTo().alert();
+		Log4j2.info("Ok is clicked");
+		simpleAlert.accept();
+	}
+		@Test(priority=2)
+		public  void Alert2() throws Exception {
+		WebElement element2 = wd.findElement(By.xpath("//button[@id='confirmButton']"));
+		element2.click();
+		Alert confirmationAlert = wd.switchTo().alert();
+		Thread.sleep(2000);
+		String alertText2 = confirmationAlert.getText();
+		Log4j2.info("Alert text is choosen " + alertText2);
+		confirmationAlert.accept();
+		Assert.assertTrue(true);
+		wd.quit();
+
+	}
+}
