@@ -1,0 +1,141 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.sakha</groupId>
+	<artifactId>cucumber</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.source>17</maven.compiler.source>
+		<maven.compiler.target>17</maven.compiler.target>
+	</properties>
+	<dependencies>
+
+		<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.24</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-java -->
+		<dependency>
+			<groupId>io.cucumber</groupId>
+			<artifactId>cucumber-java</artifactId>
+			<version>7.9.0</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-junit -->
+		<dependency>
+			<groupId>io.cucumber</groupId>
+			<artifactId>cucumber-junit</artifactId>
+			<version>7.9.0</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-testng -->
+		<dependency>
+			<groupId>io.cucumber</groupId>
+			<artifactId>cucumber-testng</artifactId>
+			<version>7.9.0</version>
+		</dependency>
+
+
+		<!-- https://mvnrepository.com/artifact/io.cucumber/gherkin 
+                <dependency>
+                    <groupId>io.cucumber</groupId>
+                    <artifactId>gherkin</artifactId>
+                    <version>25.0.2</version>
+                </dependency>
+                -->
+
+		<!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-java</artifactId>
+			<version>4.6.0</version>
+		</dependency>
+
+		<!-- REPORT CONFIGURATION - Extent Report -->
+		<!-- https://mvnrepository.com/artifact/com.vimalselvam/cucumber-extentsreport -->
+
+		<!-- https://mvnrepository.com/artifact/com.vimalselvam/cucumber-extentsreport -->
+		<dependency>
+			<groupId>com.vimalselvam</groupId>
+			<artifactId>cucumber-extentsreport</artifactId>
+			<version>3.1.1</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/com.aventstack/extentreports -->
+		<dependency>
+			<groupId>com.aventstack</groupId>
+			<artifactId>extentreports</artifactId>
+			<version>5.0.9</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/tech.grasshopper/extentreports-cucumber7-adapter -->
+		<dependency>
+			<groupId>tech.grasshopper</groupId>
+			<artifactId>extentreports-cucumber7-adapter</artifactId>
+			<version>1.9.1</version>
+		</dependency>
+
+
+	</dependencies>
+	<build>
+		<plugins>
+			<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-clean-plugin -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-clean-plugin</artifactId>
+				<version>3.2.0</version>
+			</plugin>
+
+			<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-compiler-plugin -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.10.1</version>
+			</plugin>
+
+			<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-surefire-plugin -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>3.0.0-M5</version>
+				<configuration>
+					<suiteXmlFiles>
+						<suiteXmlFile>${project.basedir}/testng.xml</suiteXmlFile>
+					</suiteXmlFiles>
+				</configuration>
+			</plugin>
+
+			<!-- REPORT CONFIGURATION - Cluecumber Report -->
+			<!-- https://mvnrepository.com/artifact/com.trivago.rta/cluecumber-report-plugin -->
+			<!-- Documentation: https://github.com/trivago/cluecumber-report-plugin -->
+			<plugin>
+				<groupId>com.trivago.rta</groupId>
+				<artifactId>cluecumber-report-plugin</artifactId>
+				<version>2.9.4</version>
+				<executions>
+					<execution>
+						<id>report</id>
+						<phase>post-integration-test</phase>
+						<goals>
+							<goal>reporting</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<customPageTitle>GMO Cluecumber Report</customPageTitle>
+					<sourceJsonReportDirectory>${project.build.directory}/cucumber-reports</sourceJsonReportDirectory>
+					<generatedHtmlReportDirectory>${project.build.directory}/cluecumber-reports</generatedHtmlReportDirectory>
+				</configuration>
+				<!-- After execution from pom.xml, goto project folder in command prompt 
+                                        and type mvn cluecumber-report:reporting, then under folder target, report 
+                                        folder by name specified in Line 111 above will be created, open index.html 
+                                        to view the report -->
+			</plugin>
+
+		</plugins>
+	</build>
+</project>
